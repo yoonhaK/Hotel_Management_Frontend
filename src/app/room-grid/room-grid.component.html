@@ -1,0 +1,66 @@
+<mat-grid-list cols="12" gutterSize="2px" rowHeight="80px">
+  <mat-grid-tile *ngFor="let item of rooms; index as i" style="background-color: beige" matRipple
+                 [matRippleCentered]="centered"
+                 [matRippleDisabled]="disabled"
+                 [matRippleUnbounded]="unbounded"
+                 [matRippleRadius]="radius"
+                 [matRippleColor]="color">
+    <div fxLayout="column wrap" >
+      <div *ngFor=" let item_key of keyNames" style="margin: 2px">{{item_key}} : {{item[item_key]}}</div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+  <div style="width: 100vw" fxLayout="row" fxLayoutAlign="end end" >
+    <button mat-stroked-button  type="submit" (click)="this.goPrev()" style="margin-right: 10px; margin-bottom: 10px">prev</button>
+    <button mat-stroked-button  type="submit" (click)="this.goNext()" style="margin-right: 70px; margin-bottom: 10px">next</button>
+  </div>
+
+
+<mat-grid-list *ngFor="let rm_records of roomRecordsDisplay; index as roomIndex" [cols]="records_length"  rowHeight="70px" gutterSize="2px" style="margin: 2px">
+<mat-grid-tile *ngFor="let item of rm_records" [colspan]="item.cols" [style.background]="item.color"
+               matRipple
+               [matRippleCentered]="centered"
+               [matRippleDisabled]="disabled"
+               [matRippleUnbounded]="unbounded"
+               [matRippleRadius]="radius"
+               [matRippleColor]="color" fxLayout="row wrap" fxLayoutAlign="space-around center">
+  <div *ngIf="item.rm_number">
+    <div>{{item.rm_number}}</div>
+    <div>{{item.type}}</div>
+  </div>
+  <div *ngIf="item.reservation_guest"  [ngSwitch]="displayDetails" style="width: 100%; color: white">
+    <div  *ngSwitchCase="false" (mouseenter)="setDisplayDetails(true)"  fxLayout="column wrap" fxLayoutAlign="center center">
+      <div>{{item.reservation_guest.name}}</div>
+      <div>#:{{item.in_house_guests[0].length + 1}}</div>
+    </div>
+    <div *ngSwitchCase="true" (mouseleave)="setDisplayDetails(false)" fxLayout="row" fxLayoutAlign="space-around center">
+      <div *ngFor="let k of item.innerArr; index as i"  style="margin: 0px; font-size: smaller; border-color: white; border-width: thin;
+border-style: solid; flex: 1 1 auto; height: 70px" fxLayoutAlign="center center" fxFlex="{{100/item.innerArr.length}}">
+        <div (click)="openDialogA(item, i, roomIndex)">MOD
+          <div *ngIf="item.checkIn && item.checkIn.in_index === item.index + i">
+            ck_in
+          </div>
+          <div *ngIf="item.checkIn && item.checkIn.out_index === item.index + i">
+            ck_out
+          </div>
+        </div>
+<!--        <mat-radio-group aria-label="Select an option" class="smallRadio" fxLayout="column wrap">-->
+<!--          <mat-radio-button value="1">ck in</mat-radio-button>-->
+<!--          <mat-radio-button value="2">ck out</mat-radio-button>-->
+<!--          <mat-radio-button value="3">cancel reserve</mat-radio-button>-->
+<!--          <mat-radio-button value="4">cancel </mat-radio-button>-->
+<!--        </mat-radio-group>-->
+      </div>
+
+    </div>
+
+  </div>
+  <div *ngIf="item.date" style="color: white">
+    <div>{{item.date}}</div>
+    <div>{{item.day}}</div>
+  </div>
+</mat-grid-tile>
+</mat-grid-list>
+

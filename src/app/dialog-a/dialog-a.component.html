@@ -1,0 +1,39 @@
+
+<h3 mat-dialog-title> operation </h3>
+<div>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose receptionist</mat-label>
+      <mat-select [formControl]="receptionistVal" >
+        <mat-option *ngFor="let people of data.receptionists; index as i" value="{{i}}">{{people.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <h4 mat-dialog-title> reserved by: {{data.item.reservation_guest.name}} </h4>
+    <h4> in house guest: <span *ngFor="let guest of data.item.in_house_guests[data.innerIndex]"> {{guest.name}}</span></h4>
+
+      <p *ngIf="data.item.checkIn && data.item.checkIn.in_date">
+        check in:{{data.item.checkIn.in_date}}
+      </p>
+      <p *ngIf="data.item.checkIn && data.item.checkIn.out_date">
+        check out:{{data.item.checkIn.out_date}}
+      </p>
+      <p>operation date:{{data.year}}-{{data.month}}-{{data.item.index + 1 + data.innerIndex}}</p>
+      <p>check in/out operation:</p>
+  </div>
+    <div>
+    <app-normal-table style="margin-right: 20px"></app-normal-table>
+    <p style="margin-right: 200px" *ngIf="sumExist">total price:{{totalPrice}} </p>
+    </div>
+  </div>
+      <mat-radio-group aria-label="Select an option" style="margin-top: 20px" [(ngModel)]="checkOption">
+        <mat-radio-button *ngFor = "let item of options; index as i"  value = "{{i}}" style="margin-right: 20px" disabled = "{{!enabled[i]}}"
+        > {{item}}</mat-radio-button>
+      </mat-radio-group>
+</div>
+<div mat-dialog-actions fxLayout="row wrap" fxLayoutAlign="end center" >
+  <button mat-stroked-button  type="submit" (click)="submit()" style="margin-right: 10px" disabled="{{!receptionistVal.valid}}">Submit</button>
+  <button mat-stroked-button  type="submit" (click)="getBill()" style="margin-right: 10px" disabled = "{{!billEnabled}}">Get Bill</button>
+  <button mat-stroked-button  type="submit" mat-dialog-close style="margin-right: 10px">Close</button>
+</div>
+

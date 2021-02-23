@@ -1,0 +1,75 @@
+
+
+<div fxLayout="column wrap">
+<form  [formGroup]="form" class="normal-form"  fxLayout="row wrap" fxLayoutAlign="space-around center" >
+
+  <input type="hidden" formControlName="$key">
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput placeholder="name">
+    <mat-error *ngIf="form.controls['name'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Phone</mat-label>
+    <input formControlName="phone" matInput placeholder="phone">
+    <mat-error *ngIf="form.controls['phone'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Credit Card</mat-label>
+    <input formControlName="creditCard" matInput placeholder="credit card number">
+    <mat-error *ngIf="form.controls['creditCard'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Photo ID</mat-label>
+    <input formControlName="photoID" matInput placeholder="photo ID number">
+    <mat-error *ngIf="form.controls['photoID'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input formControlName="email" matInput placeholder="email">
+    <mat-error *ngIf="form.controls['email'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Choose check in date</mat-label>
+    <input matInput formControlName="inDate" [min]="minDate"  [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="form.controls['inDate'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Choose check out date</mat-label>
+    <input matInput formControlName="outDate" [min]="minDate"  [matDatepicker]="picker2">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+    <mat-error *ngIf="form.controls['outDate'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+</form>
+
+  <app-guest fxLayout="row wrap" fxFlexAlign="end" *ngFor="let item of listAdd"></app-guest>
+
+
+  <div fxFlexAlign="end">
+    <button mat-stroked-button  type="submit" (click)="displayReserveRecords()" style="margin-right: 20px">Get Reserve Records</button>
+    <button mat-stroked-button  type="submit" (click)="submitRecord()" style="margin-right: 20px">Show Available Rooms</button>
+    <button mat-stroked-button  type="submit" (click)="addGuest()" style="margin-right: 20px">Add Guest</button>
+  </div>
+  <div fxFlexAlign="end" fxLayout="row wrap">
+    <div style="margin-right: 20px"> * Use photo ID and credit card number to get records.</div>
+    <mat-checkbox [(ngModel)]="getMin" style="margin-right: 20px"> Display the cheapest available room</mat-checkbox>
+  </div>
+
+  <app-table></app-table>
+  <app-delete-table (fromChild)="fromChild($event)" ></app-delete-table>
+
+  <div fxFlexAlign="end" *ngIf="displayReserveButton">
+  <button mat-stroked-button  type="submit" (click)="reserveRoom()" style="margin-right: 20px">Reserve</button>
+  </div>
+</div>
+<app-room-grid></app-room-grid>

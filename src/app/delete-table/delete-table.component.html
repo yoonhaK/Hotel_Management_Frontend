@@ -1,0 +1,15 @@
+<table class="table table-striped" *ngIf="exist">
+  <thead>
+  <tr>
+    <th *ngFor="let cname of cnames">{{cname}}</th>
+    <th> Operation </th>     <!-- specified for delete -->
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of data; index as i">
+    <td *ngFor="let cname of cnames"> {{item[cname]}}</td>
+    <td> <button mat-stroked-button  type="submit" (click)="cancelReservation(i, item.rid)" style="margin-right: 20px">Cancel</button> </td>   <!-- specified for delete -->
+  </tr>
+  </tbody>
+</table>
+

@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutAlign="end end" >
+<mat-form-field appearance="fill">
+  <mat-label>price aggregation</mat-label>
+  <mat-select [formControl]="priceVal" >
+    <mat-option *ngFor="let item of options; index as i" value="{{i}}">{{item}}</mat-option>
+  </mat-select>
+
+</mat-form-field>
+
+<div fxFlexAlign="end" fxLayout="row">
+  <div fxFlexAlign="center" style="margin-right: 10px"> Select the price attribute group by rm_number:</div>
+  <button mat-stroked-button  type="submit" (click)="submitToGetRooms()" style="margin-right: 20px" disabled = "{{!priceVal.valid}}">Show Rooms</button>
+</div>
+  <app-normal-table fxFlexAlign="center"></app-normal-table>
+</div>

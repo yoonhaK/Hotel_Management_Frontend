@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="end end" >
+
+  <div fxLayout="row">
+<mat-checkbox *ngFor = "let item of options; index as i"  value = "{{i}}" style="margin-right: 20px" name="{{i}}" [(ngModel)]="checkOptions[i]">
+    {{item}}</mat-checkbox>
+  </div>
+<div fxFlexAlign="end" fxLayout="row">
+  <div fxFlexAlign="center" style="margin-right: 10px"> Projection for reservation_req table:</div>
+  <button mat-stroked-button  type="submit" (click)="submitToGetReservations()" style="margin-right: 20px" disabled = "{{!checkOptions.includes(true)}}">Show Projection</button>
+</div>
+  <app-normal-table fxFlexAlign="center"></app-normal-table>
+</div>
+
+

@@ -1,0 +1,25 @@
+
+<form  [formGroup]="form" class="normal-form"  fxLayout="row wrap" fxFlexAlign="bottom bottom" *ngIf="exist">
+
+
+  <input type="hidden" formControlName="$key">
+
+
+  <mat-form-field>
+    <mat-label>Guest Name</mat-label>
+    <input formControlName="name" matInput placeholder="in house guest name">
+    <mat-error *ngIf="form.controls['name'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Guest Phone</mat-label>
+    <input formControlName="phone" matInput placeholder="in house guest phone">
+    <mat-error *ngIf="form.controls['phone'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+
+
+  <div>
+    <button mat-stroked-button  type="clear" (click)="deleteRecord()">Delete</button>
+    <!--        <button mat-stroked-button  type="submit" (click)="submitRecord()">Submit</button>-->
+  </div>
+</form>

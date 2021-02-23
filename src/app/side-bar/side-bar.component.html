@@ -1,0 +1,7 @@
+
+  <ul class="nav nav-sidebar" fxFlex="row" style="font-size: medium; font-family: Arial">
+    <li [ngClass]="{active: this.path === '/management/room'}" style="margin-right: 10px"><a routerLink="/management/room">Rooms
+      <span *ngIf="this.path === '/management/room'" class="sr-only">(current)</span></a></li>
+    <li [ngClass]="{active: this.path === '/management/staff'}" ><a routerLink="/management/staff">Staff
+      <span *ngIf="this.path === '/management/staff'" class="sr-only">(current)</span></a></li>
+  </ul>

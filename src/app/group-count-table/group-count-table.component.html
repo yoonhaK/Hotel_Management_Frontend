@@ -1,0 +1,16 @@
+<div fxLayout="column" fxLayoutAlign="end end" >
+
+<form  [formGroup]="form" class="normal-form"  fxLayout="row wrap" fxLayoutAlign="space-around center" >
+  <mat-form-field>
+    <mat-label>reservations days</mat-label>
+    <input formControlName="count" matInput placeholder="reservations days">
+    <mat-error *ngIf="form.controls['count'].errors?.required"> This field is mandatory.</mat-error>
+  </mat-form-field>
+</form>
+  <div fxFlexAlign="end" fxLayout="row">
+    <div fxFlexAlign="center" style="margin-right: 10px"> Show guests who have reserved room for greater or equal to above days:</div>
+    <button mat-stroked-button  type="submit" (click)="submitToGetGuests()" style="margin-right: 20px" disabled = "{{!form.valid}}">Show Guests</button>
+  </div>
+  <app-normal-table fxFlexAlign="center"></app-normal-table>
+
+</div>
